@@ -1,0 +1,24 @@
+<div>
+
+    <form (submit)="send()" #myForm="ngForm">
+
+        <label>Name:</label>
+        <input type="text" name="name" [(ngModel)]="product.name" #nameBox="ngModel" required minlength="2">
+        <span *ngIf="nameBox.errors?.['required'] && nameBox.touched">Missing name.</span>
+        <span *ngIf="nameBox.errors?.['minlength'] && nameBox.touched">Name too short.</span>
+        
+        <label>Price: </label>
+        <input type="number" name="price" step="0.01" [(ngModel)]="product.price" #priceBox="ngModel" required min="0">
+        <span *ngIf="priceBox.errors?.['min'] && priceBox.touched">Price can't be negative.</span>
+
+        <label>Stock: </label>
+        <input type="number" name="stock" [(ngModel)]="product.stock" required>
+
+        <label>Image: </label>
+        <input type="file" accept="image/*" name="image" #imageInputBox required>
+
+        <button [disabled]="myForm.invalid">Add</button>
+
+    </form>
+
+</div>
